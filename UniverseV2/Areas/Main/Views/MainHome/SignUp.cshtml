@@ -1,0 +1,118 @@
+﻿@using CoreA.DTOs.MainDTOs
+@model SignUpViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- File -->
+    <script type="text/javascript" src="/js/jquery-3.6.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+            integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/MainCss/SignUpStyle.css">
+    <!-- this script tag is connected to Theme.js file in Sign Up folder-->
+    <script type="text/javascript" src="/js/MainJs/SignUpScripts/Theme.js"></script>
+</head>
+
+<body class="earthy">
+
+<div id="mDiv">
+
+
+    <div id="toppack">
+
+    <h2 id="signUptext" class="text-primary text-center text-md-start mt-1 mt-md-5 p-3 "><span id="sigtext">Sign Up Here</span></h2>
+    </div>
+
+    <div id="formDiv"
+         class="container d-flex flex-column flex-wrap justify-content-center align-content-center mx-auto "
+         style="margin-top: 2%;">
+        <form asp-area="Main" asp-controller="MainHome" asp-action="SignUp" method="post">
+            <div class="input-group m-4 " style="width: 300px;">
+                <span class="input-group-text" id="inputGroupPrepend"></span>
+                <input id="usersignup" asp-for="Username" required type="name" class="form-control rounded-end"
+                       placeholder="Username"/>
+
+
+            </div>
+            <div class="form-floating  m-4">
+                <input id="emailsignup" asp-for="Email" required type="email" style="width: 300px;" class="form-control"
+                       placeholder="Email"/>
+                <label for="emailsignup">Email</label>
+            </div>
+
+            <div class="form-floating m-4">
+                <input id="signuppass" asp-for="Password" required type="password" class="form-control"
+                       placeholder="RePassword" style="width: 300px;">
+                <label for="signuppass">Password</label>
+            </div>
+            <div class="form-floating  m-4">
+                <input id="repass" asp-for="RePassword" required type="password" class="form-control"
+                       placeholder="Re-Password" style="width: 300px;"/>
+                <label for="repass">Re-Password</label>
+            </div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="d-flex flex-row align-content-center justify-content-center mt-4 pt-3">
+                <button type="submit" id="signUpbtn" class="btn btn-primary text-light ">
+                    Sign Up
+                </button>
+
+            </div>
+
+
+        </form>
+
+        <button id="haveaccountbtn" type="button" class="btn btn-outline-primary position-fixed">
+            <a asp-area="Main" asp-controller="MainHome" asp-action="SignIn" style="text-decoration: none" class="text-light" target="_self">
+                I Have an Account
+            </a>
+        </button>
+        <div class="themes">
+
+            <button id="changebtn" class="btn text-light btn-outline-primary position-fixed"
+                    style="margin-left: 1%;top: 73%;left: 4%;font-family: 'Space Grotesk',serif">
+                Change your planet
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+<div  class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <img src="/Image/planet-saturn-svgrepo-com.svg" class="rounded me-2" style="width: 15px;height: 15px;" alt="planet">
+            <strong class="me-auto">MehUniverse</strong>
+            <small>Just now</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Signing up was successful. yayyy!
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+
+</html>

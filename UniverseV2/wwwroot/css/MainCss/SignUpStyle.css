@@ -1,0 +1,231 @@
+body{
+
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+
+
+
+
+
+
+}
+.earthy{
+    /*change to source to eath pic in img folder*/
+    background-image: url("/Image/earthedit.jpg");
+    background-repeat: repeat-y;
+    background-size: cover;
+    background-position: top;
+
+
+
+}
+.mars{
+    /*change to source */
+    background-image: url("/Image/marsedited.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+
+
+}
+
+#astsvg{
+    width: 70px;
+    height: 70px;
+    position: fixed;
+    bottom: 100px;
+    right:100px;
+    transform: scale(1);
+    transition-timing-function: ease-in-out;
+    transition: 2s;
+
+
+
+}
+#astsvg:hover{
+    transform: scale(3.5);
+    transition-timing-function: ease-in-out;
+    transition: 2s;
+
+}
+
+
+#haveaccountbtn{
+    margin-left: 1%;
+    top: 40%;
+    left: 5%
+}
+.moony{
+    /*change to source */
+    background-image: url("/Image/mooneedited.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+
+
+}
+
+
+
+@media only screen and (max-width: 780px) {
+    .themes{
+        display: none;
+    }
+    body{
+        /*change to source */
+        background-image: none;
+        background-color:  #2a2b2b;
+        overflow: scroll;
+
+
+
+
+
+    }
+    #astsvg{
+        display: none;
+
+
+
+    }
+
+    #haveaccountbtn{
+        top: 90%;
+        left: 32%;
+
+    }
+
+
+    #signUptext{
+
+        margin-left: 5%;
+
+
+        font-size: 50px;
+        font-family:'Libre Barcode 128 Text', serif;
+
+
+    }
+    .earthy{
+        /*change to source */
+        background-image: none;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+
+
+    }
+    .mars{
+        /*change to source */
+        background-image: none;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+
+
+    }
+    .moony{
+        /*change to source */
+        background-image: none;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+
+
+    }
+
+}
+
+@media  screen and (min-height: 768px) and (max-width:1023px) {
+
+    .themes{
+        display: none;
+    }
+    body{
+        /*change to source */
+        background-image: none;
+        background-color:  #2a2b2b;
+
+
+
+
+
+    }
+    #astsvg{
+        display: none;
+
+
+
+    }
+
+    #haveaccountbtn{
+        top: 90%;
+        left: 32%;
+
+    }
+
+
+    #signUptext{
+
+        margin-left: 5%;
+
+
+        font-size: 50px;
+        font-family:'Libre Barcode 128 Text', serif;
+
+
+    }
+    .earthy{
+        /*change to source */
+        background-image: none;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+
+
+
+    }
+    .mars{
+        /*change to source */
+        background-image: none;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+
+
+    }
+    .moony{
+        /*change to source */
+        background-image: none;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: top;
+
+
+    }
+
+
+}
+
+
+#signUptext{
+  text-align: left;
+    margin-left: 5%;
+    margin-top: 6%;
+
+    font-size: 70px;
+    font-family:'Libre Barcode 128 Text', 'Space Grotesk', serif;
+
+
+}
+#formDiv{
+        width: 50%;
+        height: 70%;
+}
+footer{
+
+
+
+}
