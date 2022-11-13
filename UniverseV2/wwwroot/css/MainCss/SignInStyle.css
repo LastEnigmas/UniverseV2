@@ -1,0 +1,45 @@
+body{
+    background-color: #2a2b2b;
+}
+footer{
+
+    height: auto;
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    position: fixed;
+    bottom: 0;
+    z-index: -1;
+
+}
+
+
+@media only screen and ( max-width:768px ) {
+#mainwelcome{
+    font-size: 20px;
+}
+    #head{
+        display: none;
+    }
+
+    #form{
+        width: 100vw;
+        position: relative;
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        align-content: center;
+    }
+    footer{
+        display: none;
+    }
+    #topc{
+        display: none;
+    }
+
+    
+}
+
+
+
+

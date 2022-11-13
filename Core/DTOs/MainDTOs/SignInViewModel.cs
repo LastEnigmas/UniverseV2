@@ -8,5 +8,8 @@ namespace CoreA.DTOs.MainDTOs
 {
     public class SignInViewModel
     {
+        public string UsernameOrEmail { get; set; }
+        public string Password { get; set; }
+
     }
 }
