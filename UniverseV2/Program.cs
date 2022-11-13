@@ -1,6 +1,8 @@
 using Data.MyDbCon;
 using Microsoft.EntityFrameworkCore;
 using CoreA.Services.MainService;
+using static CoreA.Generator.ViewToString;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +12,7 @@ builder.Services.AddDbContext<MyDb>(options => options.UseSqlServer(
     ));
 
 builder.Services.AddScoped<IMainService, MainService>();
+builder.Services.AddScoped<IViewRenderService, RenderViewToString>();
 
 var app = builder.Build();
 
