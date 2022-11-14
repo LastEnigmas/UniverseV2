@@ -1,4 +1,7 @@
-﻿using Data.Model;
+﻿using CoreA.DTOs.MainDTOs;
+using CoreA.Generator;
+using CoreA.Security;
+using Data.Model;
 using Data.MyDbCon;
 using System;
 using System.Collections.Generic;
@@ -37,6 +40,49 @@ namespace CoreA.Services.MainService
         {
             _db.Update(user);
             Save();
+        }
+        public User FindUserByUsernameOrEmail(SignInViewModel signIn)
+        {
+            User user  = _db.Users.SingleOrDefault(u => u.Email == signIn.UsernameOrEmail || u.Username == signIn.UsernameOrEmail);
+            if(user != null)
+            {
+                string passwordHelp = HashPasswordC.EncodePasswordMd5(signIn.Password);
+                if (user.Password == passwordHelp )
+                {
+                    return user;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public RegisterViewModel RegisterUser(string activeCode)
+        {
+            User user = _db.Users.SingleOrDefault(u => u.ActiveCode == activeCode);
+            if(user != null)
+            {
+                user.ActiveCode = CreateActiveCode.GenerateCode();
+                user.IsActive = true;
+
+                Update(user);
+
+                RegisterViewModel register = new RegisterViewModel()
+                {
+                    Username = user.Username,
+                    Email = user.Email,
+                };
+
+                return register;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

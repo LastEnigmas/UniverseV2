@@ -4,8 +4,13 @@ using CoreA.Security;
 using CoreA.Sender;
 using CoreA.Services.MainService;
 using Data.Model;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using static CoreA.Generator.ViewToString;
+using Microsoft.AspNetCore.Authorization;
+using System.Drawing;
 
 namespace UniverseV2.Areas.Main.Controllers
 {
@@ -20,6 +25,12 @@ namespace UniverseV2.Areas.Main.Controllers
             _render = render;
         }
 
+        #region Test_Section
+
+        [Authorize]
+        public IActionResult Hello() => View();
+
+        #endregion
 
         #region SignIn
         public IActionResult SignIn() => View();
@@ -27,6 +38,40 @@ namespace UniverseV2.Areas.Main.Controllers
         [HttpPost]
         public IActionResult SignIn(SignInViewModel signIn )
         {
+            User user = _mainService.FindUserByUsernameOrEmail(signIn);
+            if(user != null)
+            {
+                if (user.IsActive)
+                {
+                    var claims = new List<Claim>()
+                    {
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                        new Claim(ClaimTypes.Name , user.Username),
+                        new Claim(ClaimTypes.Email, user.Email),
+                    };
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    var properties = new AuthenticationProperties()
+                    {
+                        IsPersistent = true ,
+                    };
+
+                    HttpContext.SignInAsync(principal, properties);
+
+                    ViewBag.IsSignIn = true;
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("UsernameOrEmail", "Please Active Your Account First");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("UsernameOrEmail", "Username Or Email Or Password Invalid");
+                return View(signIn);
+            }
 
             return View();
         }
@@ -78,6 +123,34 @@ namespace UniverseV2.Areas.Main.Controllers
             ViewBag.IsSignUp = true;
             return View();
         }
+
+        #endregion
+
+        #region Register
+
+        public IActionResult Register(string id)
+        {
+            RegisterViewModel register = _mainService.RegisterUser(id);
+            if(register != null)
+            {
+                ViewBag.IsRegister = true;
+                return View();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        #endregion
+
+        #region SignOut
+
+
+        #endregion
+
+        #region Reset Pasword
+
 
         #endregion
     }

@@ -1,4 +1,5 @@
-﻿using Data.Model;
+﻿using CoreA.DTOs.MainDTOs;
+using Data.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,10 @@ namespace CoreA.Services.MainService
 {
     public interface IMainService
     {
+        User FindUserByUsernameOrEmail(SignInViewModel signIn );
         bool IsEmail(string email );
         bool IsUsername(string username );
+        RegisterViewModel RegisterUser(string activeCode);
         void Add(User user);
         void Update(User user);
         void Save();

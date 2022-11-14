@@ -2,6 +2,7 @@ using Data.MyDbCon;
 using Microsoft.EntityFrameworkCore;
 using CoreA.Services.MainService;
 using static CoreA.Generator.ViewToString;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,20 @@ builder.Services.AddDbContext<MyDb>(options => options.UseSqlServer(
 
 builder.Services.AddScoped<IMainService, MainService>();
 builder.Services.AddScoped<IViewRenderService, RenderViewToString>();
+
+#region Security
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+}).AddCookie(options =>
+{
+    options.LoginPath = "/SignIn";
+    options.LogoutPath = "/SignOut";
+    options.ExpireTimeSpan = TimeSpan.FromDays(29);
+});
+#endregion
 
 var app = builder.Build();
 
@@ -28,6 +43,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
