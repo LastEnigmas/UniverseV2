@@ -146,6 +146,14 @@ namespace UniverseV2.Areas.Main.Controllers
 
         #region SignOut
 
+        [Authorize]
+        [Route("SignOut")]
+        public IActionResult SignOut_User()
+        {
+            SignOutViewModel signOut = new SignOutViewModel();
+            signOut.AreYouSure = false;
+            return View(signOut);
+        }
 
         #endregion
 
