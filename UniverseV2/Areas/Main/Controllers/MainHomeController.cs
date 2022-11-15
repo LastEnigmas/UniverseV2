@@ -134,12 +134,27 @@ namespace UniverseV2.Areas.Main.Controllers
             if(register != null)
             {
                 ViewBag.IsRegister = true;
-                return View();
+                return View(register);
             }
             else
             {
                 return NotFound();
             }
+        }
+
+        #endregion
+
+        #region Forgot_Password
+
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword() => View();
+
+        [HttpPost]
+        [Route("ForgotPassword")]
+        public IActionResult ForgotPassword(ForgotPasswordViewModel forgot )
+        {
+            ViewBag.IsSend = _mainService.ForgotPasswordTask(forgot);
+            return View();
         }
 
         #endregion
@@ -159,6 +174,8 @@ namespace UniverseV2.Areas.Main.Controllers
 
         #region Reset Pasword
 
+        [Route("RestePassword")]
+        public IActionResult ResetPassword() => View();
 
         #endregion
     }

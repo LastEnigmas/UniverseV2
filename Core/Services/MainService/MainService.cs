@@ -1,6 +1,7 @@
 ﻿using CoreA.DTOs.MainDTOs;
 using CoreA.Generator;
 using CoreA.Security;
+using CoreA.Sender;
 using Data.Model;
 using Data.MyDbCon;
 using System;
@@ -8,15 +9,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CoreA.Generator.ViewToString;
 
 namespace CoreA.Services.MainService
 {
     public class MainService : IMainService
     {
         private readonly MyDb _db;
-        public MainService(MyDb db)
+        private readonly IViewRenderService _render;
+        public MainService(MyDb db , IViewRenderService render )
         {
             _db = db;
+            _render = render;
         }
 
 
@@ -40,6 +44,10 @@ namespace CoreA.Services.MainService
         {
             _db.Update(user);
             Save();
+        }
+        public User FindUser(string usernameOrEmail)
+        {
+            return _db.Users.SingleOrDefault(u => u.Username == usernameOrEmail || u.Email == usernameOrEmail);
         }
         public User FindUserByUsernameOrEmail(SignInViewModel signIn)
         {
@@ -82,6 +90,21 @@ namespace CoreA.Services.MainService
             else
             {
                 return null;
+            }
+        }
+        public bool ForgotPasswordTask(ForgotPasswordViewModel forgot)
+        {
+            User user = FindUser(forgot.UsernameOrEmail);
+            if(user != null)
+            {
+                string Body = _render.RenderToStringAsync("forgotPassword", user);
+                EmailSenders.Send(user.Email , "Register", Body);
+                return true;
+
+            }
+            else
+            {
+                return false;
             }
         }
     }

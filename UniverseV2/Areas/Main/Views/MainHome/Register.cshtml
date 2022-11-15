@@ -4,5 +4,18 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>Register</h1>
+<h1>Register Page</h1>
+
+@if (ViewBag.IsRegister == true )
+{
+    <h1>Goood @Model.Username</h1>
+    <button type="button">
+        <a asp-area="Main" asp-controller="MainHome" asp-action="SignIn">
+            Sign In Now!
+        </a>
+    </button>
+}else
+{
+        <h1>Sorry</h1>
+}
 
