@@ -11,15 +11,12 @@ namespace CoreA.DTOs.MainDTOs
 {
     public class ResetPasswordViewModel
     {
-        public string Username { get; set; }
-        public int UserId { get; set; }
-
+        public string ActiveCode { get; set; }
         [Required(ErrorMessage = "Required")]
         [Display(Name = "Password")]
-        [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Required")]
+        [Display(Name = "RePassword")]
         [Compare("Password")]
         public string RePassword { get; set; }
     }

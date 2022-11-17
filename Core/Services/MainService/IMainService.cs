@@ -14,6 +14,7 @@ namespace CoreA.Services.MainService
         bool IsEmail(string email );
         bool IsUsername(string username );
         User FindUser(string usernameOrEmail);
+        User GetUserByActiveCode(string activeCode);
         RegisterViewModel RegisterUser(string activeCode);
         bool ForgotPasswordTask(ForgotPasswordViewModel forgot);
         void Add(User user);

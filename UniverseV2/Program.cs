@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using CoreA.Services.MainService;
 using static CoreA.Generator.ViewToString;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Data.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 

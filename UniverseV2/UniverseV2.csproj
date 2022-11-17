@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Main\Controllers\" />
+    <Folder Include="Areas\Universes\Controllers\" />
   </ItemGroup>
 
 </Project>

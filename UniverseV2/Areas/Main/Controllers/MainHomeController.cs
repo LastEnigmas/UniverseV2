@@ -144,7 +144,8 @@ namespace UniverseV2.Areas.Main.Controllers
 
         #endregion
 
-        #region Forgot_Password
+        #region Forgot_Pass
+
 
         [Route("ForgotPassword")]
         public IActionResult ForgotPassword() => View();
@@ -174,8 +175,34 @@ namespace UniverseV2.Areas.Main.Controllers
 
         #region Reset Pasword
 
-        [Route("RestePassword")]
-        public IActionResult ResetPassword() => View();
+        public IActionResult ResetPassword(string id )
+        {
+            return View( new ResetPasswordViewModel()
+            {
+                ActiveCode = id ,
+            });
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPasswordViewModel resetPassword)
+        {
+
+            User user = _mainService.GetUserByActiveCode(resetPassword.ActiveCode);
+            if(user != null)
+            {
+                string HashPassword = HashPasswordC.EncodePasswordMd5(resetPassword.Password);
+                user.Password = HashPassword;
+                user.ActiveCode = CreateActiveCode.GenerateCode();
+
+                _mainService.Update(user);
+                return RedirectToAction("SignIn");
+            }
+            else
+            {
+                return NotFound();
+            }
+            return View();
+        }
 
         #endregion
     }

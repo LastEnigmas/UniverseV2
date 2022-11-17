@@ -107,5 +107,9 @@ namespace CoreA.Services.MainService
                 return false;
             }
         }
+        public User GetUserByActiveCode(string activeCode)
+        {
+            return _db.Users.SingleOrDefault(u => u.ActiveCode == activeCode);
+        }
     }
 }
